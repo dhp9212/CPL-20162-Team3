@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/activity_vertical_margin"
+    tools:context="kr.soen.bluetoothtest.MainActivity">
+
+    <TextView
+        android:id="@+id/textMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hello_world" />
+
+    <LinearLayout
+        android:id="@+id/layoutInput"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textMessage" >
+
+        <EditText
+            android:id="@+id/editData"
+            android:layout_width="0px"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:text="Receive Succeed" />
+
+        <Button
+            android:id="@+id/btnSend"
+            android:layout_width="0px"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="Send" />
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/listDevice"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/layoutInput" />
+</RelativeLayout>
