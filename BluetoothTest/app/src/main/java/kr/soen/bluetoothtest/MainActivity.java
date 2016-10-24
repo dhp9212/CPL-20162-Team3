@@ -56,6 +56,19 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         }
     }
 
+    // ListView 초기화
+    public void initListView() {
+
+        // 어댑터 생성
+        mArDevice = new ArrayList<String>();
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mArDevice);
+
+        // ListView에 어댑터와 이벤트 리스너를 지정
+        mListDevice = (ListView)findViewById(R.id.listDevice);
+        mListDevice.setAdapter(adapter);
+        mListDevice.setOnItemClickListener(this);
+    }
+
     // 블루투스 사용 가능상태 판단
     public boolean canUseBluetooth() {
 
@@ -95,6 +108,32 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
                 mTextMsg.append("\nDevice can not use");
             }
         }
+    }
+
+    // 페어링된 원격 디바이스 목록 구하기
+    public void getParedDevice() {
+
+        if( mSThread != null )
+            return;
+
+        // 서버 소켓 접속을 위한 스레드 생성 & 시작
+        mSThread = new ServerThread();
+        mSThread.start();
+
+        // 블루투스 어댑터에서 페어링된 원격 디바이스 목록을 구한다
+        Set<BluetoothDevice> devices = mBA.getBondedDevices();
+
+        // 디바이스 목록에서 하나씩 추출
+        for( BluetoothDevice device : devices ) {
+            // 디바이스를 목록에 추가
+            addDeviceToList(device.getName(), device.getAddress());
+        }
+
+        // 원격 디바이스 검색 시작
+        startFindDevice();
+
+        // 다른 디바이스에 자신을 노출
+        setDiscoverable();
     }
 
     // 원격 디바이스 검색 시작
@@ -153,19 +192,6 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         adapter.notifyDataSetChanged();
     }
 
-    // ListView 초기화
-    public void initListView() {
-
-        // 어댑터 생성
-        mArDevice = new ArrayList<String>();
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mArDevice);
-
-        // ListView 에 어댑터와 이벤트 리스너를 지정
-        mListDevice = (ListView)findViewById(R.id.listDevice);
-        mListDevice.setAdapter(adapter);
-        mListDevice.setOnItemClickListener(this);
-    }
-
     // 다른 디바이스에게 자신을 검색 허용
     public void setDiscoverable() {
 
@@ -177,32 +203,6 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
         Intent intent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
         intent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 0);
         startActivity(intent);
-    }
-
-    // 페어링된 원격 디바이스 목록 구하기
-    public void getParedDevice() {
-
-        if( mSThread != null )
-            return;
-
-        // 서버 소켓 접속을 위한 스레드 생성 & 시작
-        mSThread = new ServerThread();
-        mSThread.start();
-
-        // 블루투스 어댑터에서 페어링된 원격 디바이스 목록을 구한다
-        Set<BluetoothDevice> devices = mBA.getBondedDevices();
-
-        // 디바이스 목록에서 하나씩 추출
-        for( BluetoothDevice device : devices ) {
-            // 디바이스를 목록에 추가
-            addDeviceToList(device.getName(), device.getAddress());
-        }
-
-        // 원격 디바이스 검색 시작
-        startFindDevice();
-
-        // 다른 디바이스에 자신을 노출
-        setDiscoverable();
     }
 
     // ListView 항목 선택 이벤트 함수
@@ -412,6 +412,14 @@ public class MainActivity extends Activity implements AdapterView.OnItemClickLis
                 if( strBuf.length() < 1 ) return;
                 mEditData.setText("");
                 mSocketThread.write(strBuf);
+                break;
+            }
+            case R.id.btnDevice : {
+                Intent myIntent = new Intent(MainActivity.this, DeviceList.class);
+                myIntent.putExtra("value", "close");
+
+                startActivity(myIntent);
+
                 break;
             }
         }

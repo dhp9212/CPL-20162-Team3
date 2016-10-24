@@ -19,6 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/textMessage" >
 
+
         <EditText
             android:id="@+id/editData"
             android:layout_width="0px"
@@ -36,9 +37,17 @@
 
     </LinearLayout>
 
+    <Button
+        android:id="@+id/btnDevice"
+        android:text="Select the Device"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onClick"
+        android:layout_below="@id/layoutInput" />
+
     <ListView
         android:id="@+id/listDevice"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/layoutInput" />
+        android:layout_below="@id/btnDevice" />
 </RelativeLayout>
