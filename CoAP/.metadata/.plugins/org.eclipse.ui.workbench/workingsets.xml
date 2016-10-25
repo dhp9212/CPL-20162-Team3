@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workingSetManager>
+<workingSet editPageId="org.eclipse.ui.resourceWorkingSetPage" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1477418799339_1" label="parent" name="parent">
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/parent" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/element-connector" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/scandium" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/californium-core" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/californium-proxy" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/californium-osgi" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/demo-apps" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/sc-dtls-example-server" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/sc-dtls-example-client" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/cf-plugtest-client" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/cf-plugtest-checker" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/cf-plugtest-server" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/cf-helloworld-client" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/cf-helloworld-server" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/cf-cocoa" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/cf-secure" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/cf-proxy" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/cf-benchmark" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/cf-benchmark-observe" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/demo-certs" type="4"/>
+</workingSet>
+<workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1477418764594_0" label="Window Working Set" name="Aggregate for window 1477418764593"/>
+</workingSetManager>

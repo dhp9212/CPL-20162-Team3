@@ -1,0 +1,243 @@
+2016-10-26 03:06:46,153 [Worker-2] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using NULL lifecycle mapping for MavenProject: org.eclipse.californium:parent:1.1.0-SNAPSHOT @ D:\Schule\final_project\californium-master\californium-master\pom.xml.
+2016-10-26 03:06:47,140 [Worker-2] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using DEFAULT lifecycle mapping for MavenProject: org.eclipse.californium:element-connector:1.1.0-SNAPSHOT @ D:\Schule\final_project\californium-master\californium-master\element-connector\pom.xml.
+2016-10-26 03:06:47,244 [Worker-2] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using DEFAULT lifecycle mapping for MavenProject: org.eclipse.californium:scandium:1.1.0-SNAPSHOT @ D:\Schule\final_project\californium-master\californium-master\scandium-core\pom.xml.
+2016-10-26 03:06:47,386 [Worker-2] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: org.eclipse.californium:californium-core:1.1.0-SNAPSHOT @ D:\Schule\final_project\californium-master\californium-master\californium-core\pom.xml.
+2016-10-26 03:06:47,426 [Worker-2] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: org.eclipse.californium:californium-proxy:1.1.0-SNAPSHOT @ D:\Schule\final_project\californium-master\californium-master\californium-proxy\pom.xml.
+2016-10-26 03:06:47,503 [Worker-2] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using DEFAULT lifecycle mapping for MavenProject: org.eclipse.californium:californium-osgi:1.1.0-SNAPSHOT @ D:\Schule\final_project\californium-master\californium-master\californium-osgi\pom.xml.
+2016-10-26 03:06:47,513 [Worker-2] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using NULL lifecycle mapping for MavenProject: org.eclipse.californium:demo-apps:1.1.0-SNAPSHOT @ D:\Schule\final_project\californium-master\californium-master\demo-apps\pom.xml.
+2016-10-26 03:06:47,583 [Worker-2] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: org.eclipse.californium:sc-dtls-example-server:1.1.0-SNAPSHOT @ D:\Schule\final_project\californium-master\californium-master\demo-apps\sc-dtls-example-server\pom.xml.
+2016-10-26 03:06:47,633 [Worker-2] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: org.eclipse.californium:sc-dtls-example-client:1.1.0-SNAPSHOT @ D:\Schule\final_project\californium-master\californium-master\demo-apps\sc-dtls-example-client\pom.xml.
+2016-10-26 03:06:47,695 [Worker-2] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: org.eclipse.californium:cf-plugtest-client:1.1.0-SNAPSHOT @ D:\Schule\final_project\californium-master\californium-master\demo-apps\cf-plugtest-client\pom.xml.
+2016-10-26 03:06:47,742 [Worker-2] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: org.eclipse.californium:cf-plugtest-checker:1.1.0-SNAPSHOT @ D:\Schule\final_project\californium-master\californium-master\demo-apps\cf-plugtest-checker\pom.xml.
+2016-10-26 03:06:47,788 [Worker-2] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: org.eclipse.californium:cf-plugtest-server:1.1.0-SNAPSHOT @ D:\Schule\final_project\californium-master\californium-master\demo-apps\cf-plugtest-server\pom.xml.
+2016-10-26 03:06:47,837 [Worker-2] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: org.eclipse.californium:cf-helloworld-client:1.1.0-SNAPSHOT @ D:\Schule\final_project\californium-master\californium-master\demo-apps\cf-helloworld-client\pom.xml.
+2016-10-26 03:06:47,885 [Worker-2] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: org.eclipse.californium:cf-helloworld-server:1.1.0-SNAPSHOT @ D:\Schule\final_project\californium-master\californium-master\demo-apps\cf-helloworld-server\pom.xml.
+2016-10-26 03:06:47,931 [Worker-2] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: org.eclipse.californium:cf-cocoa:1.1.0-SNAPSHOT @ D:\Schule\final_project\californium-master\californium-master\demo-apps\cf-cocoa\pom.xml.
+2016-10-26 03:06:47,995 [Worker-2] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: org.eclipse.californium:cf-secure:1.1.0-SNAPSHOT @ D:\Schule\final_project\californium-master\californium-master\demo-apps\cf-secure\pom.xml.
+2016-10-26 03:06:48,040 [Worker-2] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: org.eclipse.californium:cf-proxy:1.1.0-SNAPSHOT @ D:\Schule\final_project\californium-master\californium-master\demo-apps\cf-proxy\pom.xml.
+2016-10-26 03:06:48,086 [Worker-2] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: org.eclipse.californium:cf-benchmark:1.1.0-SNAPSHOT @ D:\Schule\final_project\californium-master\californium-master\demo-apps\cf-benchmark\pom.xml.
+2016-10-26 03:06:48,210 [Worker-2] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: org.eclipse.californium:cf-benchmark-observe:1.1.0-SNAPSHOT @ D:\Schule\final_project\californium-master\californium-master\demo-apps\cf-benchmark-observe\pom.xml.
+2016-10-26 03:06:48,265 [Worker-2] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: org.eclipse.californium:demo-certs:1.1.0-SNAPSHOT @ D:\Schule\final_project\californium-master\californium-master\demo-certs\pom.xml.
+2016-10-26 03:06:53,840 [Worker-2] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /element-connector/src/main/java
+2016-10-26 03:06:53,840 [Worker-2] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /element-connector/src/main/resources
+2016-10-26 03:06:53,841 [Worker-2] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /element-connector/src/test/java
+2016-10-26 03:06:53,841 [Worker-2] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /element-connector/src/test/resources
+2016-10-26 03:06:53,989 [Worker-2] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /demo-certs/src/main/java
+2016-10-26 03:06:53,989 [Worker-2] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /demo-certs/src/main/resources
+2016-10-26 03:06:53,989 [Worker-2] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /demo-certs/src/test/java
+2016-10-26 03:06:54,044 [Worker-2] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /scandium/src/main/java
+2016-10-26 03:06:54,045 [Worker-2] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /scandium/src/main/resources
+2016-10-26 03:06:54,045 [Worker-2] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /scandium/src/test/java
+2016-10-26 03:06:54,045 [Worker-2] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /scandium/src/test/resources
+2016-10-26 03:06:54,086 [Worker-2] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /californium-core/src/main/java
+2016-10-26 03:06:54,086 [Worker-2] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /californium-core/src/main/resources
+2016-10-26 03:06:54,087 [Worker-2] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /californium-core/src/test/java
+2016-10-26 03:06:54,087 [Worker-2] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /californium-core/src/test/resources
+2016-10-26 03:06:54,122 [Worker-2] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /californium-osgi/src/main/java
+2016-10-26 03:06:54,123 [Worker-2] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /californium-osgi/src/main/resources
+2016-10-26 03:06:54,123 [Worker-2] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /californium-osgi/src/test/java
+2016-10-26 03:06:54,123 [Worker-2] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /californium-osgi/src/test/resources
+2016-10-26 03:06:54,166 [Worker-2] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /sc-dtls-example-client/src/main/java
+2016-10-26 03:06:54,167 [Worker-2] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /sc-dtls-example-client/src/main/resources
+2016-10-26 03:06:54,167 [Worker-2] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /sc-dtls-example-client/src/test/java
+2016-10-26 03:06:54,199 [Worker-2] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /cf-secure/src/main/java
+2016-10-26 03:06:54,200 [Worker-2] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /cf-secure/src/test/java
+2016-10-26 03:06:54,230 [Worker-2] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /cf-plugtest-server/src/main/java
+2016-10-26 03:06:54,230 [Worker-2] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /cf-plugtest-server/src/test/java
+2016-10-26 03:06:54,259 [Worker-2] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /cf-helloworld-client/src/main/java
+2016-10-26 03:06:54,259 [Worker-2] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /cf-helloworld-client/src/test/java
+2016-10-26 03:06:54,291 [Worker-2] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /cf-benchmark-observe/src/main/java
+2016-10-26 03:06:54,291 [Worker-2] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /cf-benchmark-observe/src/test/java
+2016-10-26 03:06:54,326 [Worker-2] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /cf-plugtest-checker/src/main/java
+2016-10-26 03:06:54,326 [Worker-2] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /cf-plugtest-checker/src/test/java
+2016-10-26 03:06:54,463 [Worker-2] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /cf-helloworld-server/src/main/java
+2016-10-26 03:06:54,463 [Worker-2] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /cf-helloworld-server/src/test/java
+2016-10-26 03:06:54,500 [Worker-2] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /sc-dtls-example-server/src/main/java
+2016-10-26 03:06:54,501 [Worker-2] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /sc-dtls-example-server/src/main/resources
+2016-10-26 03:06:54,501 [Worker-2] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /sc-dtls-example-server/src/test/java
+2016-10-26 03:06:54,532 [Worker-2] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /cf-cocoa/src/main/java
+2016-10-26 03:06:54,532 [Worker-2] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /cf-cocoa/src/test/java
+2016-10-26 03:06:54,563 [Worker-2] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /cf-plugtest-client/src/main/java
+2016-10-26 03:06:54,563 [Worker-2] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /cf-plugtest-client/src/test/java
+2016-10-26 03:06:54,594 [Worker-2] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /cf-benchmark/src/main/java
+2016-10-26 03:06:54,594 [Worker-2] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /cf-benchmark/src/test/java
+2016-10-26 03:06:54,635 [Worker-2] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /californium-proxy/src/main/java
+2016-10-26 03:06:54,635 [Worker-2] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /californium-proxy/src/main/resources
+2016-10-26 03:06:54,636 [Worker-2] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /californium-proxy/src/test/java
+2016-10-26 03:06:54,679 [Worker-2] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /cf-proxy/src/main/java
+2016-10-26 03:06:54,679 [Worker-2] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /cf-proxy/src/test/java
+2016-10-26 03:06:54,712 [Worker-2] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Imported and configured 20 project(s) in 15 sec
+2016-10-26 03:06:55,285 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:06:55,288 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 2 resources to certs
+2016-10-26 03:06:55,317 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:06:55,317 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\californium-master\californium-master\demo-certs\src\test\resources
+2016-10-26 03:06:56,045 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:06:56,046 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 4 resources
+2016-10-26 03:06:56,077 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:06:56,078 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-10-26 03:06:58,376 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:06:58,378 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 4 resources
+2016-10-26 03:06:58,439 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:06:58,439 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-10-26 03:06:58,698 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:06:58,699 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\californium-master\californium-master\demo-apps\cf-plugtest-server\src\main\resources
+2016-10-26 03:06:58,707 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:06:58,707 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\californium-master\californium-master\demo-apps\cf-plugtest-server\src\test\resources
+2016-10-26 03:06:58,849 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:06:58,850 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\californium-master\californium-master\demo-apps\cf-plugtest-client\src\main\resources
+2016-10-26 03:06:58,850 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:06:58,850 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\californium-master\californium-master\demo-apps\cf-plugtest-client\src\test\resources
+2016-10-26 03:06:59,263 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:06:59,263 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\californium-master\californium-master\demo-apps\cf-plugtest-checker\src\main\resources
+2016-10-26 03:06:59,264 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:06:59,264 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\californium-master\californium-master\demo-apps\cf-plugtest-checker\src\test\resources
+2016-10-26 03:06:59,352 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:06:59,352 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\californium-master\californium-master\demo-apps\cf-helloworld-server\src\main\resources
+2016-10-26 03:06:59,353 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:06:59,353 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\californium-master\californium-master\demo-apps\cf-helloworld-server\src\test\resources
+2016-10-26 03:06:59,416 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:06:59,416 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\californium-master\californium-master\demo-apps\cf-helloworld-client\src\main\resources
+2016-10-26 03:06:59,417 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:06:59,417 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\californium-master\californium-master\demo-apps\cf-helloworld-client\src\test\resources
+2016-10-26 03:06:59,475 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:06:59,475 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\californium-master\californium-master\demo-apps\cf-cocoa\src\main\resources
+2016-10-26 03:06:59,477 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:06:59,477 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\californium-master\californium-master\demo-apps\cf-cocoa\src\test\resources
+2016-10-26 03:06:59,565 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:06:59,565 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\californium-master\californium-master\demo-apps\cf-benchmark-observe\src\main\resources
+2016-10-26 03:06:59,566 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:06:59,566 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\californium-master\californium-master\demo-apps\cf-benchmark-observe\src\test\resources
+2016-10-26 03:06:59,693 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:06:59,694 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\californium-master\californium-master\demo-apps\cf-benchmark\src\main\resources
+2016-10-26 03:06:59,694 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:06:59,694 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\californium-master\californium-master\demo-apps\cf-benchmark\src\test\resources
+2016-10-26 03:07:00,055 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:07:00,056 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 5 resources
+2016-10-26 03:07:00,075 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:07:00,075 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\californium-master\californium-master\californium-proxy\src\test\resources
+2016-10-26 03:07:00,220 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:07:00,220 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\californium-master\californium-master\demo-apps\cf-proxy\src\main\resources
+2016-10-26 03:07:00,221 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:07:00,221 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\californium-master\californium-master\demo-apps\cf-proxy\src\test\resources
+2016-10-26 03:07:00,353 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:07:00,353 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 2 resources
+2016-10-26 03:07:00,361 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:07:00,361 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-10-26 03:07:01,011 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:07:01,012 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 4 resources
+2016-10-26 03:07:01,022 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:07:01,024 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2016-10-26 03:07:01,121 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:07:01,122 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 4 resources
+2016-10-26 03:07:01,131 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:07:01,131 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\californium-master\californium-master\demo-apps\sc-dtls-example-server\src\test\resources
+2016-10-26 03:07:01,222 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:07:01,222 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 4 resources
+2016-10-26 03:07:01,233 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:07:01,233 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\californium-master\californium-master\demo-apps\sc-dtls-example-client\src\test\resources
+2016-10-26 03:07:01,317 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:07:01,317 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\californium-master\californium-master\demo-apps\cf-secure\src\main\resources
+2016-10-26 03:07:01,317 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:07:01,317 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\californium-master\californium-master\demo-apps\cf-secure\src\test\resources
+2016-10-26 03:07:26,268 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:07:26,275 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource to certs
+2016-10-26 03:07:26,278 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:07:26,279 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\californium-master\californium-master\demo-certs\src\test\resources
+2016-10-26 03:07:27,066 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:07:27,068 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-10-26 03:07:27,069 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:07:27,069 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-10-26 03:07:27,108 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:07:27,108 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-10-26 03:07:27,109 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:07:27,109 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-10-26 03:07:27,136 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:07:27,137 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\californium-master\californium-master\demo-apps\cf-plugtest-server\src\main\resources
+2016-10-26 03:07:27,137 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:07:27,137 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\californium-master\californium-master\demo-apps\cf-plugtest-server\src\test\resources
+2016-10-26 03:07:27,164 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:07:27,164 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\californium-master\californium-master\demo-apps\cf-plugtest-client\src\main\resources
+2016-10-26 03:07:27,164 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:07:27,165 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\californium-master\californium-master\demo-apps\cf-plugtest-client\src\test\resources
+2016-10-26 03:07:27,192 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:07:27,193 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\californium-master\californium-master\demo-apps\cf-plugtest-checker\src\main\resources
+2016-10-26 03:07:27,193 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:07:27,193 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\californium-master\californium-master\demo-apps\cf-plugtest-checker\src\test\resources
+2016-10-26 03:07:27,225 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:07:27,226 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\californium-master\californium-master\demo-apps\cf-helloworld-server\src\main\resources
+2016-10-26 03:07:27,226 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:07:27,226 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\californium-master\californium-master\demo-apps\cf-helloworld-server\src\test\resources
+2016-10-26 03:07:27,263 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:07:27,263 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\californium-master\californium-master\demo-apps\cf-helloworld-client\src\main\resources
+2016-10-26 03:07:27,263 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:07:27,264 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\californium-master\californium-master\demo-apps\cf-helloworld-client\src\test\resources
+2016-10-26 03:07:27,296 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:07:27,296 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\californium-master\californium-master\demo-apps\cf-cocoa\src\main\resources
+2016-10-26 03:07:27,296 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:07:27,296 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\californium-master\californium-master\demo-apps\cf-cocoa\src\test\resources
+2016-10-26 03:07:27,326 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:07:27,326 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\californium-master\californium-master\demo-apps\cf-benchmark-observe\src\main\resources
+2016-10-26 03:07:27,326 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:07:27,326 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\californium-master\californium-master\demo-apps\cf-benchmark-observe\src\test\resources
+2016-10-26 03:07:27,363 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:07:27,363 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\californium-master\californium-master\demo-apps\cf-benchmark\src\main\resources
+2016-10-26 03:07:27,363 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:07:27,363 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\californium-master\californium-master\demo-apps\cf-benchmark\src\test\resources
+2016-10-26 03:07:27,432 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:07:27,432 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-10-26 03:07:27,433 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:07:27,433 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\californium-master\californium-master\californium-proxy\src\test\resources
+2016-10-26 03:07:27,490 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:07:27,490 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\californium-master\californium-master\demo-apps\cf-proxy\src\main\resources
+2016-10-26 03:07:27,490 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:07:27,491 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\californium-master\californium-master\demo-apps\cf-proxy\src\test\resources
+2016-10-26 03:07:28,145 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:07:28,148 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-10-26 03:07:28,149 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:07:28,149 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-10-26 03:07:28,185 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:07:28,185 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-10-26 03:07:28,186 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:07:28,186 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-10-26 03:07:28,218 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:07:28,218 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-10-26 03:07:28,219 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:07:28,219 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\californium-master\californium-master\demo-apps\sc-dtls-example-server\src\test\resources
+2016-10-26 03:07:28,257 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:07:28,257 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2016-10-26 03:07:28,257 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:07:28,257 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\californium-master\californium-master\demo-apps\sc-dtls-example-client\src\test\resources
+2016-10-26 03:07:28,290 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:07:28,290 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\californium-master\californium-master\demo-apps\cf-secure\src\main\resources
+2016-10-26 03:07:28,312 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2016-10-26 03:07:28,312 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\californium-master\californium-master\demo-apps\cf-secure\src\test\resources
+2016-10-26 03:07:46,163 [Worker-1] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: CoAP:CoAP:0.0.1-SNAPSHOT @ D:\Schule\final_project\CPL-20162-Team3\CoAP\CoAP\pom.xml.
+2016-10-26 03:07:46,485 [Worker-1] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /CoAP/src
+2016-10-26 03:07:46,485 [Worker-1] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Not adding source folder /CoAP/src/test/java because it overlaps with /CoAP/src
+2016-10-26 03:07:46,559 [Worker-1] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update started
+2016-10-26 03:07:46,874 [Worker-1] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: CoAP:CoAP:0.0.1-SNAPSHOT @ D:\Schule\final_project\CPL-20162-Team3\CoAP\CoAP\pom.xml.
+2016-10-26 03:07:47,311 [Worker-1] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /CoAP/src
+2016-10-26 03:07:47,319 [Worker-1] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Not adding source folder /CoAP/src/test/java because it overlaps with /CoAP/src
+2016-10-26 03:07:47,347 [Worker-1] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update completed: 0 sec
+2016-10-26 03:07:47,602 [Worker-0] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-10-26 03:07:47,603 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\CPL-20162-Team3\CoAP\CoAP\src\main\resources
+2016-10-26 03:07:47,605 [Worker-0] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-10-26 03:07:47,606 [Worker-0] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\CPL-20162-Team3\CoAP\CoAP\src\test\resources
+2016-10-26 03:10:09,014 [Worker-1] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: CoAP:CoAP:0.0.1-SNAPSHOT @ D:\Schule\final_project\CPL-20162-Team3\CoAP\CoAP\pom.xml.
+2016-10-26 03:10:09,184 [Worker-1] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-10-26 03:10:09,185 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\CPL-20162-Team3\CoAP\CoAP\src\main\resources
+2016-10-26 03:10:09,186 [Worker-1] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-10-26 03:10:09,187 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\CPL-20162-Team3\CoAP\CoAP\src\test\resources
+2016-10-26 03:10:10,738 [Worker-7] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: CoAP:CoAP:0.0.1-SNAPSHOT @ D:\Schule\final_project\CPL-20162-Team3\CoAP\CoAP\pom.xml.
+2016-10-26 03:10:10,895 [Worker-7] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-10-26 03:10:10,896 [Worker-7] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\CPL-20162-Team3\CoAP\CoAP\src\main\resources
+2016-10-26 03:10:10,897 [Worker-7] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-10-26 03:10:10,897 [Worker-7] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\CPL-20162-Team3\CoAP\CoAP\src\test\resources
+2016-10-26 03:10:28,821 [Worker-5] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-10-26 03:10:28,821 [Worker-5] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\CPL-20162-Team3\CoAP\CoAP\src\main\resources
+2016-10-26 03:10:28,822 [Worker-5] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-10-26 03:10:28,822 [Worker-5] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\CPL-20162-Team3\CoAP\CoAP\src\test\resources
+2016-10-26 03:10:32,255 [Worker-4] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-10-26 03:10:32,255 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\CPL-20162-Team3\CoAP\CoAP\src\main\resources
+2016-10-26 03:10:32,256 [Worker-4] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+2016-10-26 03:10:32,256 [Worker-4] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\Schule\final_project\CPL-20162-Team3\CoAP\CoAP\src\test\resources

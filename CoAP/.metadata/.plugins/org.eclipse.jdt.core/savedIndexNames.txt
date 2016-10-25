@@ -1,0 +1,20 @@
+INDEX VERSION 1.127+D:\Schule\final_project\CPL-20162-Team3\CoAP\.metadata\.plugins\org.eclipse.jdt.core
+2639098809.index
+2421161659.index
+1355405236.index
+270111395.index
+3390001152.index
+1733496513.index
+1572416390.index
+4165075706.index
+633597620.index
+112869714.index
+1944224169.index
+2246497993.index
+3246031189.index
+235160792.index
+1746425186.index
+1701565273.index
+3102359319.index
+416221034.index
+448706838.index
