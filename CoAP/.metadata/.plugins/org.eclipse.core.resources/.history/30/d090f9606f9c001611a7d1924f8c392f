@@ -1,0 +1,92 @@
+import java.net.URI;
+import java.net.URISyntaxException;
+
+import org.eclipse.californium.core.CoapClient;
+import org.eclipse.californium.core.CoapObserveRelation;
+import org.eclipse.californium.core.CoapResponse;
+import org.eclipse.californium.core.CoapHandler;
+import org.eclipse.californium.core.Utils;
+
+
+import static org.eclipse.californium.core.coap.MediaTypeRegistry.*;
+
+
+public class Client {
+
+	
+	/*
+    public static void main(String[] args) {
+
+        CoapClient client = new CoapClient("coap://localhost:5683");
+        
+        /*
+        CoapResponse res = client.put("payload", TEXT_PLAIN);
+        System.out.println(res.isSuccess());
+        System.out.println(res.getOptions());
+        */
+        
+        /*
+        String test = client.get().getResponseText();
+        String xml = client.get(APPLICATION_XML).getResponseText();
+        
+        System.out.println(xml);
+        */
+        
+        /*
+        CoapResponse res = client.put("payload", TEXT_PLAIN);
+        client.put("gogogog", TEXT_PLAIN);
+        */
+        
+        /*
+        client.useNONs();
+        client.delete();
+        client.useCONs().useEarlyNegotiation(32).get();
+        */
+     /*   
+        CoapObserveRelation relation = client.observe(new CoapHandler(){
+        	@Override
+        	public void onLoad(CoapResponse response){
+        		System.out.println(response.getResponseText());
+        	}
+        	
+        	@Override
+        	public void onError(){
+        		System.err.println("Fail");
+        	}
+        });
+       
+        
+        relation.proactiveCancel();
+   
+    }
+
+*/
+	public static void main(String args[]) {
+		
+		
+		
+		URI uri = null; // URI parameter of the request
+		
+
+			
+			CoapClient client = new CoapClient(uri);
+
+			CoapResponse response = client.get();
+			
+			if (response!=null) {
+				
+				System.out.println(response.getCode());
+				System.out.println(response.getOptions());
+				System.out.println(response.getResponseText());
+				
+				System.out.println("\nADVANCED\n");
+				// access advanced API with access to more details through .advanced()
+				System.out.println(Utils.prettyPrint(response));
+				
+			} else {
+				System.out.println("No response received.");
+			}
+			
+
+	}
+}

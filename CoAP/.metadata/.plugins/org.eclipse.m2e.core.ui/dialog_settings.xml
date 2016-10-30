@@ -15,6 +15,7 @@
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
 			<item value="D:\Schule\final_project\californium-master"/>
+			<item value="D:\Schule\final_project\californium.tools-master"/>
 		</list>
 		<list key="projectNameTemplate">
 			<item value="[artifactId]"/>

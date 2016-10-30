@@ -1,0 +1,18 @@
+import org.eclipse.californium.core.CoapClient;
+import org.eclipse.californium.core.CoapResponse;
+import org.eclipse.californium.core.CoapHandler;
+import org.eclipse.californium.core.CoapObserveRelation;
+
+public class Client {
+
+    public static void main(String[] args) {
+
+        CoapClient client = new CoapClient("coap://localhost:5683");
+        
+        String test = client.get().getResponseText();
+        
+        
+   
+    }
+
+}

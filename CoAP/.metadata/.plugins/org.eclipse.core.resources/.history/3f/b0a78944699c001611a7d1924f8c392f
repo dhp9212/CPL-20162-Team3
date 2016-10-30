@@ -1,0 +1,23 @@
+import org.eclipse.californium.core.CoapClient;
+import org.eclipse.californium.core.CoapResponse;
+import org.eclipse.californium.core.CoapHandler;
+
+import static org.eclipse.californium.core.coap.MediaTypeRegistry.*;
+
+
+public class Client {
+
+    public static void main(String[] args) {
+
+        CoapClient client = new CoapClient("coap://localhost:5683");
+        
+        String test = client.get().getResponseText();
+        String xml = client.get(APPLICATION_XML).getResponseText();
+        
+        
+        
+        
+   
+    }
+
+}
