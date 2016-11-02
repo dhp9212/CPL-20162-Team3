@@ -10,44 +10,45 @@
         android:id="@+id/textMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:text="Log Message" />
+
+    <EditText
+        android:id="@+id/editData1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Send Data"
+        android:layout_below="@id/textMessage"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true" />
 
     <LinearLayout
         android:id="@+id/layoutInput"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textMessage" >
+        android:layout_below="@id/editData1">
 
-
-        <EditText
-            android:id="@+id/editData"
-            android:layout_width="0px"
-            android:layout_weight="3"
+        <Button
+            android:id="@+id/btnClear"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Receive Succeed" />
+            android:onClick="onClick"
+            android:text="Clear" />
 
         <Button
             android:id="@+id/btnSend"
-            android:layout_width="0px"
-            android:layout_weight="1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="onClick"
             android:text="Send" />
-
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btnDevice"
-        android:text="Select the Device"
-        android:layout_width="match_parent"
+    <EditText
+        android:id="@+id/editData2"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="onClick"
-        android:layout_below="@id/layoutInput" />
-
-    <ListView
-        android:id="@+id/listDevice"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/btnDevice" />
+        android:text="Receive Data"
+        android:layout_below="@id/layoutInput"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>
