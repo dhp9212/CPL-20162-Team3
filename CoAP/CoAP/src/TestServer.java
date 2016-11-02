@@ -30,8 +30,6 @@ public class TestServer extends CoapServer{
 		catch(SocketException e){
 			System.err.println("Failed to initialize server : " + e.getMessage());
 		}
-		
-		
 	}
 	
 	private void addEndpoints(){
@@ -62,14 +60,11 @@ public class TestServer extends CoapServer{
 			getAttributes().setTitle("CoAP Server Resource");
 		}
 		
-		
-		// If server receives GET from client
 		@Override
 		public void handleGET(CoapExchange ex){
 			ex.respond(message);
 		}
 		
-		// If server receives PUT from client
 		@Override
 		public void handlePUT(CoapExchange exchange){
 			byte[] payload = exchange.getRequestPayload();
