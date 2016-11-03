@@ -30,6 +30,8 @@ public class TestServer extends CoapServer{
 		catch(SocketException e){
 			System.err.println("Failed to initialize server : " + e.getMessage());
 		}
+		
+		
 	}
 	
 	private void addEndpoints(){
@@ -47,9 +49,9 @@ public class TestServer extends CoapServer{
 	
 	public TestServer() throws SocketException{
 		add(new Resource());
-		
-		
 	}
+	
+	
 	
 	class Resource extends CoapResource{
 		
@@ -60,22 +62,49 @@ public class TestServer extends CoapServer{
 			getAttributes().setTitle("CoAP Server Resource");
 		}
 		
+		TestDB db = new TestDB(message);
+		
+		
+		// If server receives GET from client
+		// DB select
 		@Override
 		public void handleGET(CoapExchange ex){
+			getDB(db, message);
+			
+			
+			/* TODO: 
+			getDB에서 SELECT하고 그걸 String으로 만들어서 handleGET에서 String으로 받음
+			그 String을 client에게 보내고 client에서 String을 처리하든지 아니면 앱에서 처리하든지 해서 화면에 뿌림
+			*/
 			ex.respond(message);
 		}
 		
+		// If server receives PUT from client
+		// DB modify
 		@Override
 		public void handlePUT(CoapExchange exchange){
 			byte[] payload = exchange.getRequestPayload();
 			
 			try{
 				message = new String(payload, "UTF-8");
+				putDB(db, message);
+				
 				exchange.respond(CHANGED, message);
 			}catch(Exception e){
 				e.printStackTrace();
 				exchange.respond(BAD_REQUEST, "Invalid String");
 			}
+			
+			
+			
 		}
+	}
+		
+	public void putDB(TestDB db, String message){
+		db.processMsg(message, "/", "PUT");
+	}
+	
+	public void getDB(TestDB db, String message){
+		db.processMsg(message, "/", "GET");
 	}
 }
