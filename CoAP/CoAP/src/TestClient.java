@@ -112,11 +112,15 @@ public class TestClient {
 	 
 	 //GET : Getting from server respond payload by METHOD handleGET
 	 //PUT : Client send payload to server and server does echo back by METHOD handlePUT
+	
+
+//	 args[0] = "GET";
+//	 args[2] = "asdasdasd";
+	 
 	 
 	 args[0] = "PUT";
 	 args[1] = "coap://127.0.0.1/ServerResource";
-	 args[2] = "asdasdasd";
-	 
+	 args[2] = "700/'test'/null/null";
 	 
   // display help if no parameters specified 
   if (args.length == 0) { 

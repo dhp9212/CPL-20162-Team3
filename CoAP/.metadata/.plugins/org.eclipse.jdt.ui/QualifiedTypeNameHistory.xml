@@ -4,4 +4,9 @@
 <fullyQualifiedTypeName name="org.eclipse.californium.core.CoapHandler"/>
 <fullyQualifiedTypeName name="org.eclipse.californium.core.CoapObserveRelation"/>
 <fullyQualifiedTypeName name="org.eclipse.californium.core.coap.Request"/>
+<fullyQualifiedTypeName name="javax.net.ssl.SSLContext"/>
+<fullyQualifiedTypeName name="java.sql.DriverManager"/>
+<fullyQualifiedTypeName name="com.mysql.jdbc.Statement"/>
+<fullyQualifiedTypeName name="java.sql.Statement"/>
+<fullyQualifiedTypeName name="java.sql.ResultSet"/>
 </qualifiedTypeNameHistroy>

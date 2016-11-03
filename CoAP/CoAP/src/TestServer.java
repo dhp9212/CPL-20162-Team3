@@ -55,23 +55,22 @@ public class TestServer extends CoapServer{
 	
 	class Resource extends CoapResource{
 		
-		String message = "Exchange with Server";
+		//String message = "Exchange with Server";
 		
 		public Resource(){
 			super("ServerResource");
 			getAttributes().setTitle("CoAP Server Resource");
 		}
 		
-		TestDB db = new TestDB(message);
-		
+		TestDB db = new TestDB();
 		
 		// If server receives GET from client
 		// DB select
 		@Override
 		public void handleGET(CoapExchange ex){
-			getDB(db, message);
 			
-			
+			String message = db.processMsg("", "", "GET");
+
 			/* TODO: 
 			getDB에서 SELECT하고 그걸 String으로 만들어서 handleGET에서 String으로 받음
 			그 String을 client에게 보내고 client에서 String을 처리하든지 아니면 앱에서 처리하든지 해서 화면에 뿌림
@@ -86,25 +85,21 @@ public class TestServer extends CoapServer{
 			byte[] payload = exchange.getRequestPayload();
 			
 			try{
-				message = new String(payload, "UTF-8");
-				putDB(db, message);
+				String message = new String(payload, "UTF-8");
+				String ret = db.processMsg(message, "/", "PUT");
 				
-				exchange.respond(CHANGED, message);
+				//exchange.respond(CHANGED, ret);
+				exchange.respond(ret);
+				
 			}catch(Exception e){
 				e.printStackTrace();
 				exchange.respond(BAD_REQUEST, "Invalid String");
 			}
 			
 			
-			
 		}
 	}
-		
-	public void putDB(TestDB db, String message){
-		db.processMsg(message, "/", "PUT");
-	}
 	
-	public void getDB(TestDB db, String message){
-		db.processMsg(message, "/", "GET");
-	}
+	
+	
 }

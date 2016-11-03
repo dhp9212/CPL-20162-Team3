@@ -9,36 +9,57 @@ import javax.net.ssl.SSLContext;
 
 public class TestDB {
 	
-	private String message;
+
 	
 	private String url = "jdbc:mysql://localhost/university";
 	private String id = "root";
 	private String pwd = "ehdgk123";
 	
-	public TestDB(String message){
-		this.message = message;
-	}
 	
-	public void processMsg(String message, String tokenizer, String request){
-			
+	
+	public String processMsg(String message, String tokenizer, String request){
+
+		String ret = "";
+		
 		try{
 	
-			Connection con = doConnection(url, id, pwd);
+			Connection con = getConnection(url, id, pwd);
 			Statement state = con.createStatement();
 			
 			if(request.equals("GET")){
 				ResultSet result = select(state, "SELECT * FROM STUDENT");
-				/*TODO:
-				 * while문 돌려서 getString으로 column마다 데이터 뽑아내고 String으로 만들든지 해서 재조합
-				 */
+				
+				while(result.next()){
+					int id = result.getInt("SNO");
+					String name = result.getString("SNAME");
+					
+					ret += id + " " + name;
+				}
 			}
 			else if(request.equals("PUT")){
-				String[] strarr = message.split(tokenizer);
-				modify(state, "query");
+				String[] token = message.split(tokenizer);
+				
+				String query = "INSERT INTO STUDENT VALUES(";
+				for(int i = 0; i < token.length; i++){
+					query += token[i];
+					
+					if(i != token.length-1)
+						query += ',';
+				}
+				query += ")";
+				
+				
+
+				modify(state, query);
+				ret = "SUCCESS";
+
+				
+				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return ret;
 	}
 	
 	
@@ -69,6 +90,25 @@ public class TestDB {
 		}
 	}
 	
+	
+	public static Connection getConnection(String url, String id, String pwd){
+
+		Connection con = null;
+		
+		try{
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			con = DriverManager.getConnection(url, id, pwd);
+			System.out.println("Connection success");
+		}catch(ClassNotFoundException e){
+			System.err.println("Not found Driver");
+		}catch(SQLException e){
+			System.out.println("Connection failed");
+			e.printStackTrace();
+		}
+		
+		return con;
+	}
 
 	/*
 	
@@ -108,22 +148,5 @@ public class TestDB {
 		
 	}
 	*/
-	public static Connection doConnection(String url, String id, String pwd){
-
-		Connection con = null;
-		
-		try{
-			Class.forName("com.mysql.jdbc.Driver");
-			
-			con = DriverManager.getConnection(url, id, pwd);
-			System.out.println("Connection success");
-		}catch(ClassNotFoundException e){
-			System.err.println("Not found Driver");
-		}catch(SQLException e){
-			System.out.println("Connection failed");
-			e.printStackTrace();
-		}
-		
-		return con;
-	}
+	
 }
