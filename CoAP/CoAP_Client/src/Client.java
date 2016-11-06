@@ -58,7 +58,7 @@ import org.eclipse.californium.core.network.config.NetworkConfig;
  * <li>{@code SampleClient POST coap://someServer.org:5683 my data} 
  * </ul> 
  */ 
-public class TestClient { 
+public class Client { 
  
  static { 
   CaliforniumLogger.initialize(); 
@@ -119,7 +119,8 @@ public class TestClient {
 	 
 	 
 	 args[0] = "PUT";
-	 args[1] = "coap://127.0.0.1/ServerResource";
+	 //args[1] = "coap://127.0.0.1/ServerResource";
+	 args[1] = "coap://192.168.10.107/ServerResource";
 	 args[2] = "700/'test'/null/null";
 	 
   // display help if no parameters specified 
@@ -272,7 +273,7 @@ public class TestClient {
   System.out.println("Californium (Cf) Console Client"); 
   System.out.println("(c) 2014, Institute for Pervasive Computing, ETH Zurich"); 
   System.out.println(); 
-  System.out.println("Usage: " + TestClient.class.getSimpleName() + " [-l] METHOD URI [PAYLOAD]"); 
+  System.out.println("Usage: " + Client.class.getSimpleName() + " [-l] METHOD URI [PAYLOAD]"); 
   System.out.println("  METHOD  : {GET, POST, PUT, DELETE, DISCOVER, OBSERVE}"); 
   System.out.println("  URI     : The CoAP URI of the remote endpoint or resource"); 
   System.out.println("            A coaps URI will automatically use CoAP over DTLS"); 
@@ -284,8 +285,8 @@ public class TestClient {
   System.out.println("  -cert   : Use full X.509 certificates instead of raw public keys"); 
   System.out.println(); 
   System.out.println("Examples:"); 
-  System.out.println("  " + TestClient.class.getSimpleName() + " DISCOVER coap://localhost"); 
-  System.out.println("  " + TestClient.class.getSimpleName() + " PUT coap://iot.eclipse.org:5683/large-put my data"); 
+  System.out.println("  " + Client.class.getSimpleName() + " DISCOVER coap://localhost"); 
+  System.out.println("  " + Client.class.getSimpleName() + " PUT coap://iot.eclipse.org:5683/large-put my data"); 
  } 
  
  /*

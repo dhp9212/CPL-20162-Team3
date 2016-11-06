@@ -1,0 +1,6 @@
+In terminal
+
+1. Move directory containing "Server.jar".
+
+2. Enter "java -jar Server.jar"
+

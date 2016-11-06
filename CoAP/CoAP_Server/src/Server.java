@@ -15,14 +15,14 @@ import static org.eclipse.californium.core.coap.CoAP.ResponseCode.*;
 
 
 
-public class TestServer extends CoapServer{
+public class Server extends CoapServer{
 	
 	private static final int COAP_PORT = NetworkConfig.getStandard().getInt(NetworkConfig.Keys.COAP_PORT);
 	
 	public static void main(String[] args){
 		
 		try{
-			TestServer server = new TestServer();
+			Server server = new Server();
 			server.addEndpoints();
 			server.start();
 			
@@ -47,7 +47,7 @@ public class TestServer extends CoapServer{
 		}
 	}
 	
-	public TestServer() throws SocketException{
+	public Server() throws SocketException{
 		add(new Resource());
 	}
 	
@@ -62,7 +62,7 @@ public class TestServer extends CoapServer{
 			getAttributes().setTitle("CoAP Server Resource");
 		}
 		
-		TestDB db = new TestDB();
+		Database db = new Database();
 		
 		// If server receives GET from client
 		// DB select

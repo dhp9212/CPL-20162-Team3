@@ -7,11 +7,11 @@ import java.sql.Statement;
 import javax.net.ssl.SSLContext;
 
 
-public class TestDB {
+public class Database {
 	
 
 	
-	private String url = "jdbc:mysql://localhost/university";
+	private String url = "jdbc:mysql://192.168.10.100/university";
 	private String id = "root";
 	private String pwd = "ehdgk123";
 	
