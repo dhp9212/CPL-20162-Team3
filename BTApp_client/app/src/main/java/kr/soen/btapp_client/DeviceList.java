@@ -2,67 +2,37 @@ package kr.soen.btapp_client;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothSocket;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.AsyncTask;
-import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.ScrollView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Set;
-import java.util.UUID;
 
-public class DeviceList extends AppCompatActivity  implements AdapterView.OnItemClickListener, View.OnClickListener {
+public class DeviceList extends AppCompatActivity  implements AdapterView.OnItemClickListener {
     ArrayList<String> mArDevice;
     ListView mListDevice;
-    TextView mTextMsg;
-    EditText mEditData;
-    Button mSendBtn;
-    ScrollView mScrollView;
-    static public BluetoothAdapter mmBTA;
-    Toast logMsg;
-    int count;
-    static final UUID BLUE_UUID = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
-    static public BluetoothDevice mmBTD = null;
-    static public BluetoothSocket mmBTS;
-    public InputStream mmInStream;
-    public OutputStream mmOutStream;
+    static public BluetoothAdapter mmmBTA;
+    static public BluetoothDevice mmmBTD = null;
+    static final int RESULT_DEVICE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_device_list);
 
-        mTextMsg = (TextView)findViewById(R.id.textMessage);
-        mTextMsg.setMovementMethod(new ScrollingMovementMethod());
-        mEditData = (EditText)findViewById(R.id.editData);
-        mEditData.setOnClickListener(this);
-        mSendBtn = (Button)findViewById(R.id.btnSend);
-        mSendBtn.setOnClickListener(this);
-        mScrollView = (ScrollView)findViewById(R.id.scroll);
-
         Intent myIntent = getIntent();
-        BTASerial BTAdapter = (BTASerial)myIntent.getSerializableExtra("BTAdapter");
+        BTSerial BTAdapter = (BTSerial)myIntent.getSerializableExtra("BTAdapter");
 
-        mmBTA = BTAdapter.getBTAdapter();
+        mmmBTA = BTAdapter.getBTAdapter();
 
         initListView();
 
@@ -81,7 +51,7 @@ public class DeviceList extends AppCompatActivity  implements AdapterView.OnItem
 
     public void getParedDevice() {
 
-        Set<BluetoothDevice> devices = mmBTA.getBondedDevices();
+        Set<BluetoothDevice> devices = mmmBTA.getBondedDevices();
 
         for( BluetoothDevice device : devices )
         {
@@ -105,15 +75,15 @@ public class DeviceList extends AppCompatActivity  implements AdapterView.OnItem
     {
         stopFindDevice();
 
-        mmBTA.startDiscovery();
+        mmmBTA.startDiscovery();
 
         registerReceiver(mBlueRecv, new IntentFilter( BluetoothDevice.ACTION_FOUND ));
     }
 
     public void stopFindDevice()
     {
-        if( mmBTA.isDiscovering() ) {
-            mmBTA.cancelDiscovery();
+        if( mmmBTA.isDiscovering() ) {
+            mmmBTA.cancelDiscovery();
             unregisterReceiver(mBlueRecv);
         }
     }
@@ -132,7 +102,6 @@ public class DeviceList extends AppCompatActivity  implements AdapterView.OnItem
 
     public void onItemClick(AdapterView parent, View view, int position, long id)
     {
-        count = 0;
         String strItem = mArDevice.get(position);
 
         int pos = strItem.indexOf(" - ");
@@ -141,176 +110,20 @@ public class DeviceList extends AppCompatActivity  implements AdapterView.OnItem
         String name = strItem.substring(0, pos);
         String address = strItem.substring(pos + 3);
 
-        String msg = "선택한 기기의 이름 : " + name + "\n선택한 기기의 주소 : " + address;
-        mTextMsg.setText(msg);
-
         stopFindDevice();
 
-        mmBTD = mmBTA.getRemoteDevice(address);
+        mmmBTD = mmmBTA.getRemoteDevice(address);
 
-        doConnect(mmBTD);
-    }
+        Intent data = new Intent();
+        data.putExtra("BTDevice", new BTSerial(mmmBTD, name, address));
+        setResult(RESULT_DEVICE, data);
 
-    public void doConnect(BluetoothDevice device) {
-        mmBTD = device;
-
-        try {
-            mmBTS = mmBTD.createRfcommSocketToServiceRecord(BLUE_UUID);
-            mmBTA.cancelDiscovery();
-            new ConnectTask().execute();
-        } catch (IOException e) {
-            logMessege(e.toString());
-        }
-    }
-
-    private class ConnectTask extends AsyncTask<Void, Void, Object> {
-        @Override
-        protected void onPreExecute() {
-
-        }
-
-        @Override
-        protected Object doInBackground(Void... params) {
-            try {
-                mmBTS.connect();
-                mmInStream = mmBTS.getInputStream();
-                mmOutStream = mmBTS.getOutputStream();
-            } catch (Throwable t) {
-                Log.e( "TAG", "connect? "+ t.getMessage() );
-                doClose();
-                return t;
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Object result) {
-            if (result instanceof Throwable) {
-                logMessege(result.toString());
-            } else {
-                hideWaitDialog();
-            }
-        }
-    }
-
-    public static void hideWaitDialog() {
-    }
-
-    public void doClose() {
-        new CloseTask().execute();
-    }
-
-    private class CloseTask extends AsyncTask<Void, Void, Object> {
-        @Override
-        protected Object doInBackground(Void... params) {
-            try {
-                try{mmOutStream.close();}catch(Throwable t){/*ignore*/}
-                try{mmInStream.close();}catch(Throwable t){/*ignore*/}
-                mmBTS.close();
-            } catch (Throwable t) {
-                return t;
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Object result) {
-            if (result instanceof Throwable) {
-                logMessege(result.toString());
-            }
-        }
-    }
-
-    private class SendTask extends AsyncTask<String, String, Object> {
-        @Override
-        protected Object doInBackground(String... params) {
-            try {
-                String taskString = params[0];
-
-                publishProgress(taskString);
-
-                byte[] outbuff = taskString.getBytes();
-                mmOutStream.write(outbuff);
-                mmOutStream.flush();
-
-                byte[] inbuff = new byte[1024];
-                int len = mmInStream.read(inbuff);
-
-                Log.e( "TAG", "recv? "+ len );
-
-                return new String(inbuff, 0, len);
-            } catch (Throwable t) {
-                doClose();
-                return t;
-            }
-        }
-
-        @Override
-        protected void onProgressUpdate(String... values) {
-            super.onProgressUpdate(values);
-
-            mTextMsg.append("\n" + ++count + ". 송신 메시지 : " + values[0]);
-
-            mScrollView.post(new Runnable() {
-                @Override
-                public void run() {
-                    mScrollView.fullScroll(View.FOCUS_DOWN);
-                }
-            });
-        }
-
-        @Override
-        protected void onPostExecute(Object result) {
-            if (result instanceof Exception) {
-                logMessege(result.toString());
-            } else {
-                doSetResultText(result.toString());
-            }
-        }
-    }
-
-    public void doSetResultText(String text) {
-        mTextMsg.append("\n" + count + ". 수신 메시지 : " + text);
-
-        mScrollView.post(new Runnable() {
-            @Override
-            public void run() {
-                mScrollView.fullScroll(View.FOCUS_DOWN);
-            }
-        });
-    }
-
-    public void doSend(String msg) {
-        SystemClock.sleep(1000);
-        new SendTask().execute(msg);
-    }
-
-    public void onClick(View v) {
-        switch( v.getId() ) {
-            case R.id.editData :
-            {
-                mEditData.setText("");
-            }
-            case R.id.btnSend :
-            {
-                String strBuf = mEditData.getText().toString();
-                if( strBuf.length() < 1 ) return;
-                mEditData.setText("");
-                doSend(strBuf);
-                break;
-            }
-        }
+        finish();
     }
 
     public void onDestroy() {
         super.onDestroy();
 
         stopFindDevice();
-    }
-
-    public void logMessege(String log)
-    {
-        logMsg = Toast.makeText(this, log, Toast.LENGTH_SHORT);
-        logMsg.show();
     }
 }
