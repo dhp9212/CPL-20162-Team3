@@ -58,14 +58,14 @@ public class BTApp_server {
   
         public void run() {  
             try {  
-            	byte[] buff = new byte[1024];  
-                int n = 0;  
-                while ((n = btIn.read(buff)) > 0) {  
-                    String data = new String(buff, 0, n);  
+            	byte[] buff = new byte[1024]; 
+            	int n;
+                while ((n = btIn.read(buff)) != -1) {  
+                    String data = new String(buff, 0, n, "UTF-8");  
                     System.out.println("Message from mobile device: " + data);
                     
                     System.out.println("Sending response :" + data);
-                    btOut.write(data.getBytes());  
+                    btOut.write(data.getBytes("UTF-8"));  
                     btOut.flush(); 
                 }
             	/*BufferedReader bReader = new BufferedReader(new InputStreamReader(btIn, "UTF8"));
