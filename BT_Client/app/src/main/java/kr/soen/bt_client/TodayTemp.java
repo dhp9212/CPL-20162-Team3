@@ -2,8 +2,11 @@ package kr.soen.bt_client;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
@@ -27,11 +30,16 @@ public class TodayTemp extends AppCompatActivity {
     LineChart tempchart;
     TextView maxTemp;
     TextView avgTemp;
+    ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_today_temp);
+
+        actionBar = getSupportActionBar();
+
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         currentDate = (TextView)findViewById(R.id.date);//현재 날짜 초기화
         currentDate.setTypeface(Typeface.createFromAsset(getAssets(), "NanumBarunGothicUltraLight.ttf"));
@@ -111,6 +119,24 @@ public class TodayTemp extends AppCompatActivity {
         float avg = sum/countTokens;
 
         avgTemp.append(form.format(avg));
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_back, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        switch(id) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
 

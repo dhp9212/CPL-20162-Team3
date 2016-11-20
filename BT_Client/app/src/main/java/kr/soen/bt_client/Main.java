@@ -5,15 +5,20 @@ import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -39,6 +44,7 @@ public class Main extends AppCompatActivity implements OnClickListener{
     BackPressCloseHandler backPressCloseHandler;
     ActionBar title;
     RelativeLayout background;
+    TextView btState;
     TextView tempText1;
     TextView tempText2;
     Button currenttempBtn;
@@ -46,6 +52,8 @@ public class Main extends AppCompatActivity implements OnClickListener{
 
     boolean connect = false;
     String taskString;
+    String remoteDeviceName;
+    IntentFilter filter;
 
     static final UUID BLUE_UUID = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
     static final String RESULT_CONNECTION = "1";
@@ -70,6 +78,9 @@ public class Main extends AppCompatActivity implements OnClickListener{
         title = getSupportActionBar();
         title.setBackgroundDrawable(new ColorDrawable(0xff4c8eff));
 
+        //현재 블루투스 상태 표시 text 초기화
+        btState = (TextView)findViewById(R.id.btstate);
+
         //현재 온도 표시 text 초기화
         tempText1 = (TextView) findViewById(R.id.temptext1);
         tempText1.setTypeface(Typeface.createFromAsset(getAssets(), "NanumBarunGothicUltraLight.ttf"));
@@ -82,6 +93,11 @@ public class Main extends AppCompatActivity implements OnClickListener{
         currenttempBtn = (Button)findViewById(R.id.currenttemp_btn);
         currenttempBtn.setOnClickListener(this);
 
+        filter = new IntentFilter();
+        filter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
+        filter.addAction(BluetoothDevice.ACTION_ACL_DISCONNECTED);
+        registerReceiver(BlueRecv, filter);
+
         if (mBTA == null)
         {
             logMessege("기기가 블루투스를 지원하지 않습니다.");
@@ -92,10 +108,14 @@ public class Main extends AppCompatActivity implements OnClickListener{
             {
                 logMessege("블루투스가 이미 활성화되었습니다.");
 
+                btState.setText("블루투스가 활성화되었습니다.");
+
                 setDiscoverable();//블투 검색 허용
             }
             else
             {
+                btState.setText("블루투스가 활성화되지 않았습니다.");
+
                 AlertDialog.Builder dialog = new AlertDialog.Builder(Main.this);
                 dialog.setTitle("블루투스가 활성화되지 않았습니다.");
                 dialog.setMessage("블루투스를 활성화 하시겠습니까?");
@@ -117,7 +137,6 @@ public class Main extends AppCompatActivity implements OnClickListener{
                     }
                 });
                 dialog.show();
-
             }
         }
     }
@@ -131,6 +150,8 @@ public class Main extends AppCompatActivity implements OnClickListener{
                 logMessege("블루투스가 활성화되었습니다.");
 
                 setDiscoverable();//블투 검색 허용
+
+                btState.setText("기기와 연결되지 않았습니다.");
             }
             else // 사용자가 블루투스 활성화 취소했을때
             {
@@ -145,15 +166,16 @@ public class Main extends AppCompatActivity implements OnClickListener{
 
                 mBTD = BTDevice.getBTDevice();
 
-                String name = BTDevice.getName();
-                logMessege("'" + name + "' 기기와 연결합니다.");
+                remoteDeviceName = mBTD.getName();
+                logMessege("'" + remoteDeviceName + "' 기기와 연결합니다.");
 
                 doConnect(mBTD);//디바이스 연결
             }
         }
     }
 
-    public void setDiscoverable() {
+    public void setDiscoverable()
+    {
         if (mBTA.getScanMode() == BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE) {
             return;
         }
@@ -169,10 +191,19 @@ public class Main extends AppCompatActivity implements OnClickListener{
         try {
             mBTS = mBTD.createRfcommSocketToServiceRecord(BLUE_UUID);
             mBTA.cancelDiscovery();
+
             new ConnectTask().execute();//connect 쓰레드 시작
         } catch (IOException e) {
             logMessege(e.toString());
         }
+    }
+
+    public void doCommu(String msg) {
+        new CommuTask().execute(msg);//통신 쓰레드 시작
+    }
+
+    public void doClose() {
+        new CloseTask().execute();//종료쓰레드 시작
     }
 
     private class ConnectTask extends AsyncTask<Void, Void, Object> {
@@ -218,39 +249,77 @@ public class Main extends AppCompatActivity implements OnClickListener{
                     connect = true;
 
                     logMessege("연결이 완료되었습니다.");
+
+                    btState.setText("현재 연결된 기기 : " + remoteDeviceName);
                 }
             }
         }
     }
 
-    public void doClose() {
-        new CloseTask().execute();//종료쓰레드 시작
-    }
+    BroadcastReceiver BlueRecv = new BroadcastReceiver() {
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
 
-    private class CloseTask extends AsyncTask<Void, Void, Object> {
-        @Override
-        protected Object doInBackground(Void... params) {
-            try {
-                try{mmOutStream.close();}catch(Throwable t){/*ignore*/}
-                try{mmInStream.close();}catch(Throwable t){/*ignore*/}
-                mBTS.close();
-            } catch (Throwable t) {
-                return t;
+            if(action.equals(BluetoothAdapter.ACTION_STATE_CHANGED))
+            {
+                int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR);
+
+                if (state == BluetoothAdapter.STATE_OFF)
+                {
+                    if (!connect)
+                    {
+                        handler.sendEmptyMessage(1);
+                    }
+                    else if (connect)
+                    {
+                        handler.sendEmptyMessage(2);
+                    }
+
+                }
+                else if (state == BluetoothAdapter.STATE_ON)
+                {
+                    handler.sendEmptyMessage(3);
+                }
             }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Object result) {
-            if (result instanceof Throwable) {
-                logMessege(result.toString());
+            if(action.equals(BluetoothDevice.ACTION_ACL_DISCONNECTED))
+            {
+                handler.sendEmptyMessage(4);
             }
         }
-    }
+    };
 
-    public void doCommu(String msg) {
-        new CommuTask().execute(msg);//통신 쓰레드 시작
-    }
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg)
+        {
+            super.handleMessage(msg);
+
+            switch (msg.what)
+            {
+                case 1:
+                    logMessege("블루투스가 비활성화 되었습니다.");
+                    btState.setText("블루투스가 활성화되지 않았습니다.");
+                    break;
+
+                case 2:
+                    logMessege("블루투스가 비활성화 되었습니다.");
+                    btState.setText("블루투스가 활성화되지 않았습니다.");
+                    logMessege(remoteDeviceName + "와의 연결이 끊어졌습니다.");
+                    doClose();
+                    break;
+
+                case 3:
+                    logMessege("블루투스가 활성화되었습니다.");
+                    btState.setText("기기와 연결되지 않았습니다.");
+                    break;
+
+                case 4:
+                    logMessege(remoteDeviceName + "와의 연결이 끊어졌습니다.");
+                    doClose();
+                    break;
+            }
+        }
+    };
 
     private class CommuTask extends AsyncTask<String, String, Object> {
         @Override
@@ -295,10 +364,28 @@ public class Main extends AppCompatActivity implements OnClickListener{
         }
     }
 
-    public void clearArray(byte[] buff) {
-        for (int i = 0; i < buff.length; i++)
-        {
-            buff[i] = 0;
+    private class CloseTask extends AsyncTask<Void, Void, Object> {
+        @Override
+        protected Object doInBackground(Void... params) {
+            try {
+                try{mmOutStream.close();}catch(Throwable t){/*ignore*/}
+                try{mmInStream.close();}catch(Throwable t){/*ignore*/}
+                mBTS.close();
+                connect = false;
+            } catch (Throwable t) {
+                return t;
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Object result) {
+            if (result instanceof Throwable) {
+                logMessege(result.toString());
+            } else {
+                setTemp("--");
+                btState.setText("기기와 연결되지 않았습니다.");
+            }
         }
     }
 
@@ -347,28 +434,32 @@ public class Main extends AppCompatActivity implements OnClickListener{
         }
     }
 
-    public void setTemp(String temp_s) {
-        float temp_i = Float.parseFloat(temp_s);
+    @Override
+    public void onBackPressed() {
+        backPressCloseHandler.onBackPressed();
+    }
 
-        if(temp_i >= 45)
+    public void setTemp(String temp_s) {
+
+        if(!temp_s.equals("--") && Float.parseFloat(temp_s) >= 45)
         {
             title.setBackgroundDrawable(new ColorDrawable(0xffff4c4c));
             background.setBackgroundColor(Color.parseColor("#ff4c4c"));
             tempText1.setText(temp_s);
         }
-        else if(temp_i >= 35)
+        else if(!temp_s.equals("--") && Float.parseFloat(temp_s) >= 35)
         {
             title.setBackgroundDrawable(new ColorDrawable(0xffffa54c));
             background.setBackgroundColor(Color.parseColor("#ffa54c"));
             tempText1.setText(temp_s);
         }
-        else if(temp_i >= 25)
+        else if(!temp_s.equals("--") && Float.parseFloat(temp_s) >= 25)
         {
             title.setBackgroundDrawable(new ColorDrawable(0xffffdc4c));
             background.setBackgroundColor(Color.parseColor("#ffdc4c"));
             tempText1.setText(temp_s);
         }
-        else if(temp_i >= 15)
+        else if(!temp_s.equals("--") && Float.parseFloat(temp_s) >= 15)
         {
             title.setBackgroundDrawable(new ColorDrawable(0xff86ea6e));
             background.setBackgroundColor(Color.parseColor("#86ea6e"));
@@ -382,13 +473,32 @@ public class Main extends AppCompatActivity implements OnClickListener{
         }
     }
 
-    @Override
-    public void onBackPressed() {
-        backPressCloseHandler.onBackPressed();
-    }
-
     public void logMessege(String log) {
         logMsg = Toast.makeText(this, log, Toast.LENGTH_SHORT);
         logMsg.show();
+    }
+
+    public void clearArray(byte[] buff) {
+        for (int i = 0; i < buff.length; i++)
+        {
+            buff[i] = 0;
+        }
+    }
+
+    @Override
+    public void onDestroy()
+    {
+        super.onDestroy();
+
+        if(connect) {
+            doClose();
+        }
+
+        unregisterReceiver(BlueRecv);
+
+        if(mBTA.isEnabled())
+        {
+            mBTA.disable();
+        }
     }
 }

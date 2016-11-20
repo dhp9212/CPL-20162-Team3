@@ -118,7 +118,6 @@ public class DeviceList extends AppCompatActivity implements AdapterView.OnItemC
         int pos = strItem.indexOf(" - ");
         if( pos <= 0 ) return;
 
-        String name = strItem.substring(0, pos);
         String address = strItem.substring(pos + 3);
 
         stopFindDevice();// 디바이스 검색 중지
@@ -126,7 +125,7 @@ public class DeviceList extends AppCompatActivity implements AdapterView.OnItemC
         mmBTD = mmBTA.getRemoteDevice(address); // 상대방 디바이스를 구한다
 
         Intent data = new Intent();
-        data.putExtra("BTDevice", new BTSerial(mmBTD, name));
+        data.putExtra("BTDevice", new BTSerial(mmBTD));
         setResult(RESULT_DEVICE, data);
 
         finish();

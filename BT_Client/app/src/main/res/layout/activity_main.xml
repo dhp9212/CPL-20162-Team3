@@ -11,6 +11,13 @@
     android:background="#4c8eff"
     tools:context="kr.soen.bt_client.Main">
 
+    <TextView
+        android:id="@+id/btstate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#80ffffff"
+        android:text=""/>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
