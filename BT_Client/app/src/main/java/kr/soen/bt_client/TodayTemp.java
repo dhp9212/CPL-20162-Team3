@@ -24,7 +24,7 @@ import java.util.StringTokenizer;
 
 public class TodayTemp extends AppCompatActivity {
     float[] tempTokens = new float[8];
-    DecimalFormat form = new DecimalFormat("#.#");
+    DecimalFormat form = new DecimalFormat("#.##");
 
     TextView currentDate;
     LineChart tempchart;
@@ -75,7 +75,7 @@ public class TodayTemp extends AppCompatActivity {
         }
 
         LineDataSet setTemp = new LineDataSet(valsTemp, "온도");
-        setTemp.setValueTextSize(15);
+        setTemp.setValueTextSize(12);
 
         ArrayList<String> xVals = new ArrayList<>();
         for (int i = 0; i < 8; i++)
@@ -106,9 +106,7 @@ public class TodayTemp extends AppCompatActivity {
                 max_f = token;
             }
         }
-
-        String max_s = Float.toString(max_f);
-        maxTemp.append(max_s);
+        maxTemp.append(form.format(max_f));
 
 
         float sum = 0;

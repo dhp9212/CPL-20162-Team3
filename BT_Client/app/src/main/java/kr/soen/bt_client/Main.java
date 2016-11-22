@@ -32,6 +32,7 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Set;
 import java.util.UUID;
 
 public class Main extends AppCompatActivity implements OnClickListener{
@@ -50,11 +51,13 @@ public class Main extends AppCompatActivity implements OnClickListener{
     Button currenttempBtn;
     Toast logMsg;
 
-    boolean connect = false;
+    boolean isConnect = false;
+    boolean isHandover = false;
     String taskString;
     String remoteDeviceName;
     IntentFilter filter;
     AlertDialog.Builder dialog;
+    BRhandler handler;
 
     static final UUID BLUE_UUID = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
     static final String RESULT_CONNECTION = "1";
@@ -165,19 +168,10 @@ public class Main extends AppCompatActivity implements OnClickListener{
             {
                 BTSerial BTDevice = (BTSerial)data.getSerializableExtra("BTDevice");
 
-                if (connect)
-                {
-                    doClose();
-                    mBTD = BTDevice.getBTDevice();
-                }
-                else
-                {
-                    mBTD = BTDevice.getBTDevice();
-                }
-
+                mBTD = BTDevice.getBTDevice();
 
                 remoteDeviceName = mBTD.getName();
-                logMessege("'" + remoteDeviceName + "' 기기와 연결합니다.");
+                logMessege("'" + remoteDeviceName + "' 기기와 연결을 시도합니다.");
 
                 doConnect(mBTD);//디바이스 연결
             }
@@ -208,6 +202,41 @@ public class Main extends AppCompatActivity implements OnClickListener{
         }
     }
 
+    public void doHandoverConnect() {
+        isHandover = true;
+        new ConnectTask().execute();
+    }
+
+    public void doHandover() {
+        Set<BluetoothDevice> devices = mBTA.getBondedDevices();
+
+        try {
+
+            for( BluetoothDevice device : devices )
+            {
+                mBTD = mBTA.getRemoteDevice(device.getAddress());
+                mBTS = mBTD.createRfcommSocketToServiceRecord(BLUE_UUID);
+
+                try {
+                    mBTS.connect();
+                } catch (IOException e){
+                    mBTD = null;
+                    mBTS = null;
+                    continue;
+                }
+                break;
+            }
+
+            if (mBTS != null && mBTS.isConnected())
+            {
+                mBTA.cancelDiscovery();
+            }
+
+        } catch (IOException e) {
+            //logMessege(e.toString());
+        }
+    }
+
     public void doCommu(String msg) {
         new CommuTask().execute(msg);//통신 쓰레드 시작
     }
@@ -229,8 +258,19 @@ public class Main extends AppCompatActivity implements OnClickListener{
 
         @Override
         protected Object doInBackground(Void... params) {
+            if (isHandover)
+            {
+                doHandover();
+            }
+
             try {
-                mBTS.connect();
+                if (!isHandover) {
+                    mBTS.connect();
+                }
+                else
+                {
+                    isHandover = false;
+                }
                 mmInStream = mBTS.getInputStream();
                 mmOutStream = mBTS.getOutputStream();
 
@@ -242,7 +282,6 @@ public class Main extends AppCompatActivity implements OnClickListener{
                 return new String(inbuff, 0, len, "UTF-8");
             } catch (Throwable t) {
                 Log.e( "TAG", "connect? "+ t.getMessage() );
-                logMessege(t.toString());
                 doClose();//쓰레드 종료
                 return t;
             }
@@ -250,18 +289,30 @@ public class Main extends AppCompatActivity implements OnClickListener{
 
         @Override
         protected void onPostExecute(Object result) {
-            if (result instanceof Throwable) {
-                logMessege(result.toString());
-            } else {
+            if (result instanceof Throwable)
+            {
+                asyncDialog.dismiss();
+
+                logMessege("연결이 비정상적으로 종료되었습니다.");
+            }
+            else
+            {
                 if(result.toString().equals(RESULT_CONNECTION))
                 {
                     asyncDialog.dismiss();
 
-                    connect = true;
+                    isConnect = true;
 
                     logMessege("연결이 정상적으로 완료되었습니다.");
 
-                    btState.setText("현재 연결된 기기 : " + remoteDeviceName);
+                    String str = "현재 연결된 기기 : " + remoteDeviceName;
+                    btState.setText(str);
+                }
+                else
+                {
+                    asyncDialog.dismiss();
+
+                    logMessege("연결이 비정상적으로 종료되었습니다.");
                 }
             }
         }
@@ -269,6 +320,8 @@ public class Main extends AppCompatActivity implements OnClickListener{
 
     BroadcastReceiver BlueRecv = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
+            handler = new BRhandler();
+
             String action = intent.getAction();
 
             if(action.equals(BluetoothAdapter.ACTION_STATE_CHANGED))
@@ -277,7 +330,7 @@ public class Main extends AppCompatActivity implements OnClickListener{
 
                 if (state == BluetoothAdapter.STATE_OFF)
                 {
-                    if (!connect)
+                    if (!isConnect)
                     {
                         handler.sendEmptyMessage(1);
                     }
@@ -296,10 +349,13 @@ public class Main extends AppCompatActivity implements OnClickListener{
             {
                 handler.sendEmptyMessage(4);
             }
+
+
         }
     };
 
-    Handler handler = new Handler() {
+    class BRhandler extends Handler
+    {
         @Override
         public void handleMessage(Message msg)
         {
@@ -329,10 +385,11 @@ public class Main extends AppCompatActivity implements OnClickListener{
                 case 4:
                     logMessege(remoteDeviceName + "와의 연결이 끊어졌습니다.");
                     doClose();
+                    doHandoverConnect();
                     break;
             }
         }
-    };
+    }
 
     private class CommuTask extends AsyncTask<String, String, Object> {
         @Override
@@ -384,7 +441,7 @@ public class Main extends AppCompatActivity implements OnClickListener{
                 try{mmOutStream.close();}catch(Throwable t){/*ignore*/}
                 try{mmInStream.close();}catch(Throwable t){/*ignore*/}
                 mBTS.close();
-                connect = false;
+                isConnect = false;
             } catch (Throwable t) {
                 return t;
             }
@@ -414,14 +471,30 @@ public class Main extends AppCompatActivity implements OnClickListener{
 
         switch(id) {
             case R.id.menu_select:
-                Intent myIntent1 = new Intent(Main.this, DeviceList.class);
-                myIntent1.putExtra("BTAdapter", new BTSerial(mBTA));
-                startActivityForResult(myIntent1, REQUEST_DEVICE);
+                if (mBTA != null && !isConnect)
+                {
+                    Intent myIntent1 = new Intent(Main.this, DeviceList.class);
+                    myIntent1.putExtra("BTAdapter", new BTSerial(mBTA));
+                    startActivityForResult(myIntent1, REQUEST_DEVICE);
+                    return true;
+                }
+                else if (mBTA == null)
+                {
+                    logMessege("기기가 블루투스를 지원하지 않습니다.");
+                    return true;
+                }
+
+                logMessege("이미 다른 기기와 연결되었습니다.");
                 return true;
 
             case R.id.menu_avg:
-                if(connect) {
+                if(isConnect) {
                     doCommu(RQUEST_TODAY_TEMP);
+                    return true;
+                }
+                else if (mBTA == null)
+                {
+                    logMessege("기기가 블루투스를 지원하지 않습니다.");
                     return true;
                 }
 
@@ -436,9 +509,14 @@ public class Main extends AppCompatActivity implements OnClickListener{
         switch (v.getId())
         {
             case R.id.currenttemp_btn:
-                if(connect)
+                if(isConnect)
                 {
                     doCommu(REQUEST_CURRENT_TEMP);
+                    break;
+                }
+                else if (mBTA == null)
+                {
+                    logMessege("기기가 블루투스를 지원하지 않습니다.");
                     break;
                 }
 
@@ -503,13 +581,13 @@ public class Main extends AppCompatActivity implements OnClickListener{
     {
         super.onDestroy();
 
-        if(connect) {
+        if(isConnect) {
             doClose();
         }
 
         unregisterReceiver(BlueRecv);
 
-        if(mBTA.isEnabled())
+        if(mBTA != null && mBTA.isEnabled())
         {
             mBTA.disable();
         }
