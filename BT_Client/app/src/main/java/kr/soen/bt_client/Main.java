@@ -54,6 +54,7 @@ public class Main extends AppCompatActivity implements OnClickListener{
     String taskString;
     String remoteDeviceName;
     IntentFilter filter;
+    AlertDialog.Builder dialog;
 
     static final UUID BLUE_UUID = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
     static final String RESULT_CONNECTION = "1";
@@ -116,7 +117,7 @@ public class Main extends AppCompatActivity implements OnClickListener{
             {
                 btState.setText("블루투스가 활성화되지 않았습니다.");
 
-                AlertDialog.Builder dialog = new AlertDialog.Builder(Main.this);
+                dialog = new AlertDialog.Builder(Main.this);
                 dialog.setTitle("블루투스가 활성화되지 않았습니다.");
                 dialog.setMessage("블루투스를 활성화 하시겠습니까?");
 
@@ -164,7 +165,16 @@ public class Main extends AppCompatActivity implements OnClickListener{
             {
                 BTSerial BTDevice = (BTSerial)data.getSerializableExtra("BTDevice");
 
-                mBTD = BTDevice.getBTDevice();
+                if (connect)
+                {
+                    doClose();
+                    mBTD = BTDevice.getBTDevice();
+                }
+                else
+                {
+                    mBTD = BTDevice.getBTDevice();
+                }
+
 
                 remoteDeviceName = mBTD.getName();
                 logMessege("'" + remoteDeviceName + "' 기기와 연결합니다.");
@@ -206,7 +216,7 @@ public class Main extends AppCompatActivity implements OnClickListener{
         new CloseTask().execute();//종료쓰레드 시작
     }
 
-    private class ConnectTask extends AsyncTask<Void, Void, Object> {
+    public class ConnectTask extends AsyncTask<Void, Void, Object> {
         ProgressDialog asyncDialog = new ProgressDialog(Main.this);
 
         @Override
@@ -232,6 +242,7 @@ public class Main extends AppCompatActivity implements OnClickListener{
                 return new String(inbuff, 0, len, "UTF-8");
             } catch (Throwable t) {
                 Log.e( "TAG", "connect? "+ t.getMessage() );
+                logMessege(t.toString());
                 doClose();//쓰레드 종료
                 return t;
             }
@@ -248,7 +259,7 @@ public class Main extends AppCompatActivity implements OnClickListener{
 
                     connect = true;
 
-                    logMessege("연결이 완료되었습니다.");
+                    logMessege("연결이 정상적으로 완료되었습니다.");
 
                     btState.setText("현재 연결된 기기 : " + remoteDeviceName);
                 }
@@ -270,7 +281,7 @@ public class Main extends AppCompatActivity implements OnClickListener{
                     {
                         handler.sendEmptyMessage(1);
                     }
-                    else if (connect)
+                    else
                     {
                         handler.sendEmptyMessage(2);
                     }
@@ -299,6 +310,7 @@ public class Main extends AppCompatActivity implements OnClickListener{
                 case 1:
                     logMessege("블루투스가 비활성화 되었습니다.");
                     btState.setText("블루투스가 활성화되지 않았습니다.");
+                    dialog.show();
                     break;
 
                 case 2:
@@ -306,6 +318,7 @@ public class Main extends AppCompatActivity implements OnClickListener{
                     btState.setText("블루투스가 활성화되지 않았습니다.");
                     logMessege(remoteDeviceName + "와의 연결이 끊어졌습니다.");
                     doClose();
+                    dialog.show();
                     break;
 
                 case 3:
