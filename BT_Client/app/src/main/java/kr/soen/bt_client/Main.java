@@ -228,6 +228,7 @@ public class Main extends AppCompatActivity implements OnClickListener{
 
             if (mBTS != null && mBTS.isConnected())
             {
+                remoteDeviceName = mBTD.getName();
                 mBTA.cancelDiscovery();
             }
 
