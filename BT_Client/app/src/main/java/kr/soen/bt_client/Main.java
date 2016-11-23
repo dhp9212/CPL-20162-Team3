@@ -203,7 +203,6 @@ public class Main extends AppCompatActivity implements OnClickListener{
     }
 
     public void doHandoverConnect() {
-        isHandover = true;
         new ConnectTask().execute();
     }
 
@@ -384,6 +383,7 @@ public class Main extends AppCompatActivity implements OnClickListener{
 
                 case 4:
                     logMessege(remoteDeviceName + "와의 연결이 끊어졌습니다.");
+                    isHandover = true;
                     doClose();
                     doHandoverConnect();
                     break;
@@ -441,7 +441,6 @@ public class Main extends AppCompatActivity implements OnClickListener{
                 try{mmOutStream.close();}catch(Throwable t){/*ignore*/}
                 try{mmInStream.close();}catch(Throwable t){/*ignore*/}
                 mBTS.close();
-                isConnect = false;
             } catch (Throwable t) {
                 return t;
             }
@@ -453,8 +452,12 @@ public class Main extends AppCompatActivity implements OnClickListener{
             if (result instanceof Throwable) {
                 logMessege(result.toString());
             } else {
-                setTemp("--");
-                btState.setText("기기와 연결되지 않았습니다.");
+                if (!isHandover)
+                {
+                    setTemp("--");
+                    btState.setText("기기와 연결되지 않았습니다.");
+                }
+                isConnect = false;
             }
         }
     }
