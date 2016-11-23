@@ -1,3 +1,4 @@
+import java.io.UnsupportedEncodingException;
 import java.net.Inet4Address;
 import java.net.Inet6Address;
 import java.net.InetAddress;
@@ -17,9 +18,24 @@ import static org.eclipse.californium.core.coap.CoAP.ResponseCode.*;
 
 public class Server extends CoapServer{
 	
+	static final String REQUEST_CURRENT_TEMP = "2";
+	static final String RQUEST_TODAY_TEMP ="3";
+	
+	static String ip_addr = "";
+	
 	private static final int COAP_PORT = NetworkConfig.getStandard().getInt(NetworkConfig.Keys.COAP_PORT);
 	
 	public static void main(String[] args){
+		
+		
+/*
+		if(args.length != 1){
+			System.out.println("Usage : java -jar FILENAME.jar IP_ADDRESS");
+			System.exit(0);
+		}
+		ip_addr = args[0];
+*/
+		ip_addr = "192.168.10.100";
 		
 		try{
 			Server server = new Server();
@@ -30,8 +46,7 @@ public class Server extends CoapServer{
 		catch(SocketException e){
 			System.err.println("Failed to initialize server : " + e.getMessage());
 		}
-		
-		
+
 	}
 	
 	private void addEndpoints(){
@@ -50,9 +65,7 @@ public class Server extends CoapServer{
 	public Server() throws SocketException{
 		add(new Resource());
 	}
-	
-	
-	
+
 	class Resource extends CoapResource{
 		
 		//String message = "Exchange with Server";
@@ -62,20 +75,32 @@ public class Server extends CoapServer{
 			getAttributes().setTitle("CoAP Server Resource");
 		}
 		
-		Database db = new Database();
+		
+		Database db = new Database(ip_addr);
 		
 		// If server receives GET from client
 		// DB select
 		@Override
-		public void handleGET(CoapExchange ex){
+		public void handleGET(CoapExchange exchange){
+			byte[] payload = exchange.getRequestPayload();
 			
-			String message = db.processMsg("", "", "GET");
+			String ret = "";
+			String message;
+			try {
+				message = new String(payload, "UTF-8");
+				if(message.equals(REQUEST_CURRENT_TEMP)){
+					ret = db.processMsg(REQUEST_CURRENT_TEMP,  "GET");
+				}
+				else if(message.equals(RQUEST_TODAY_TEMP)){
+					ret = db.processMsg(RQUEST_TODAY_TEMP,  "GET");
+				}
+				
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
 
-			/* TODO: 
-			getDB에서 SELECT하고 그걸 String으로 만들어서 handleGET에서 String으로 받음
-			그 String을 client에게 보내고 client에서 String을 처리하든지 아니면 앱에서 처리하든지 해서 화면에 뿌림
-			*/
-			ex.respond(message);
+			
+			exchange.respond(ret);
 		}
 		
 		// If server receives PUT from client
@@ -86,20 +111,18 @@ public class Server extends CoapServer{
 			
 			try{
 				String message = new String(payload, "UTF-8");
-				String ret = db.processMsg(message, "/", "PUT");
+				String ret = db.processMsg(message, "PUT");
 				
 				//exchange.respond(CHANGED, ret);
 				exchange.respond(ret);
 				
 			}catch(Exception e){
 				e.printStackTrace();
-				exchange.respond(BAD_REQUEST, "Invalid String");
+				exchange.respond(BAD_REQUEST, "Invalid Payload");
 			}
 			
 			
 		}
 	}
-	
-	
 	
 }

@@ -9,17 +9,28 @@ import javax.net.ssl.SSLContext;
 
 public class Database {
 	
-
+	static final String REQUEST_CURRENT_TEMP = "2";
+	static final String RQUEST_TODAY_TEMP ="3";
 	
-	private String url = "jdbc:mysql://192.168.10.100/university";
+	static final String ENDPOINT_BLUETOOTH = "BT";
+	static final String ENDPOINT_BLUETOOTH_CLOSE = "BTCL";
+	static final String ENDPOINT_SENSOR_TEMPERATURE = "TMPR";
+
+	private String url = "";
+	//private String url = "jdbc:mysql://192.168.10.100/VLC_Infra";
 	private String id = "root";
 	private String pwd = "ehdgk123";
 	
+	public Database(String ip_addr){
+		url = "jdbc:mysql://" + ip_addr + "/VLC_Infra";
+		System.out.println(url);
+	}
 	
-	
-	public String processMsg(String message, String tokenizer, String request){
+	public String processMsg(String message, String request){
 
 		String ret = "";
+		String seperater = "#"; // for device
+		String tokenizer = "/"; // for data
 		
 		try{
 	
@@ -27,34 +38,111 @@ public class Database {
 			Statement state = con.createStatement();
 			
 			if(request.equals("GET")){
-				ResultSet result = select(state, "SELECT * FROM STUDENT");
 				
-				while(result.next()){
-					int id = result.getInt("SNO");
-					String name = result.getString("SNAME");
+				String query = "";
+
+				
+				
+				if(message.equals(REQUEST_CURRENT_TEMP)){
+					query = "SELECT SVALUE FROM SENSOR_DATA "
+							+ "ORDER BY STIME DESC LIMIT 1";
 					
-					ret += id + " " + name;
+					
+					ResultSet result = select(state, query);
+					
+					
+					while(result.next()){
+						
+						float value = result.getFloat("SVALUE");
+						
+						/*
+						value = Math.round(value*10);
+						value = value / 10;
+						*/
+						ret += value;
+						
+						if(!result.isLast()){
+							ret += "/";
+						}
+					}
 				}
+				
+				else if(message.equals(RQUEST_TODAY_TEMP)){
+					query = "SELECT SVALUE FROM SENSOR_DATA "
+							+ "WHERE EXTRACT(YEAR FROM STIME) = EXTRACT(YEAR FROM NOW()) "
+							+ "AND EXTRACT(MONTH FROM STIME) = EXTRACT(MONTH FROM NOW()) "
+							+ "AND EXTRACT(DAY FROM STIME) = EXTRACT(DAY FROM NOW())"
+							+ "AND EXTRACT(HOUR FROM STIME) MOD 3 = 0";
+							
+					ResultSet result = select(state, query);
+					
+					while(result.next()){
+						
+						float value = result.getFloat("SVALUE");
+						/*
+						value = Math.round(value*10);
+						value = value / 10;
+						*/
+						ret += value;
+						
+						if(!result.isLast()){
+							ret += "/";
+						}
+					}
+				}
+				System.out.println(ret);
 			}
 			else if(request.equals("PUT")){
-				String[] token = message.split(tokenizer);
+				String[] sep = message.split(seperater);
 				
-				String query = "INSERT INTO STUDENT VALUES(";
-				for(int i = 0; i < token.length; i++){
-					query += token[i];
+				String[] token = sep[1].split(tokenizer);
+				
+				
+				String query = "";
+				
+
+				if(sep[0].equals(ENDPOINT_BLUETOOTH)){
 					
-					if(i != token.length-1)
-						query += ',';
+					boolean vlc_con = true;
+					boolean ep_con = true;
+					
+					
+					if(vlc_con = chkInsert(state, "VLC_INFO", "MAC", token[0])){
+						query = "INSERT INTO VLC_INFO VALUES('" + token[0] + "', '" + token[1] + "')";
+						modify(state, query);
+					}
+					if(ep_con = chkInsert(state, "EP_INFO", "MAC", token[2])){
+						query = "INSERT INTO EP_INFO VALUES('" + token[2] + "', '" + token[3] + "')";
+						modify(state, query);
+					}
+					
+					
+					// handover ????????
+					if(chkHandover(state, token[0], token[2])){
+						query = "UPDATE REGISTRATION SET VLC_MAC = '" + token[0] + "' ";
+						query += "WHERE EP_MAC = '" + token[2] + "'";
+						modify(state, query);
+					}
+					
+					// new pairing registration
+					else{
+						query = "INSERT INTO REGISTRATION VALUES('" + token[0] + "', '" + token[2] + "')";
+						modify(state, query);
+					}
+					
+					
+					
+					
 				}
-				query += ")";
-				
-				
-
-				modify(state, query);
-				ret = "SUCCESS";
-
-				
-				
+				else if(sep[0].equals(ENDPOINT_SENSOR_TEMPERATURE)){
+					query = "INSERT INTO SENSOR_DATA VALUES('" + sep[0] + "', " + Float.parseFloat(token[0]) + ", now())";
+					modify(state, query);
+				}
+				else if(sep[0].equals(ENDPOINT_BLUETOOTH_CLOSE)){
+					query = "DELETE FROM REGISTRATION WHERE VLC_MAC = '" + token[0] + "' AND EP_MAC = '" + token[1] + "'";
+					modify(state, query);
+				}
+				ret = "Data Accepted";
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -109,44 +197,60 @@ public class Database {
 		
 		return con;
 	}
-
-	/*
 	
-	public static void main(String[] args){
-
+	public boolean chkInsert(Statement state, String table, String col, String condition) throws SQLException{
 		
-		try {
-			Connection con = doConnection();
-			Statement state = con.createStatement();
-			
-			//SELECT
-			//ResultSet result = state.executeQuery("SELECT * FROM STUDENT");
-			
-			//INSERT
-			//state.executeUpdate("INSERT INTO STUDENT VALUES(700, 'TEST', '3', 'COMP')");
-			
-			//DELETE
-			//state.executeUpdate("DELETE FROM STUDENT WHERE SNO = '700'");
-			
-			//UPDATE
-			//state.executeUpdate("UPDATE STUDENT SET SNAME = 'CHANGED' WHERE SNO = '700'");
-			
-			
-			
-			while(result.next()){
-				int id = result.getInt("SNO");
-				String name = result.getString("SNAME");
-				
-				System.out.println(id + "\t" + name);
+		boolean ret = true;
+		String query = "";
+		
+		query = "SELECT " + col + " FROM " + table + " WHERE " + col + " = '" + condition + "'";
+		
+		
+		ResultSet result = select(state, query);
+		
+		while(result.next()){
+			if(result.getString(col).equals(condition)){
+				ret = false;
+				break;
 			}
-			
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
 		}
-			
+		return ret;
+	}
+	
+	
+	// different VLC_MAC at same EP_MAC return true
+	public boolean chkHandover(Statement state, String vlc_mac, String ep_mac) throws SQLException{
+		
+		boolean ret = true;
+		
+		boolean vlc_con = false;
+		boolean ep_con = false;
+		
+		ResultSet result;
+		String query = "";
+		
+		query = "SELECT VLC_MAC FROM REGISTRATION WHERE VLC_MAC = '" + vlc_mac + "'";
+		result = select(state, query);
+		
+		while(result.next()){
+			if(result.getString("VLC_MAC").equals(vlc_mac)){
+				vlc_con = false;
+				break;
+			}
+		}
+		
+		query = "SELECT EP_MAC FROM REGISTRATION WHERE EP_MAC = '" + ep_mac + "'";
+		result = select(state, query);
+		
+		while(result.next()){
+			if(result.getString("EP_MAC").equals(vlc_mac)){
+				vlc_con = true;
+				break;
+			}
+		}
+				
+		return (vlc_con && ep_con);
 		
 	}
-	*/
-	
+
 }
