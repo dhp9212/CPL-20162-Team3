@@ -32,6 +32,7 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.DecimalFormat;
 import java.util.Set;
 import java.util.UUID;
 
@@ -66,6 +67,8 @@ public class Main extends AppCompatActivity implements OnClickListener{
     static final int REQUEST_DEVICE = 1;
     static final int RESULT_DEVICE = 1;
     static final int ACTION_ENABLE_BT = 101;
+
+    DecimalFormat form = new DecimalFormat("#");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -189,6 +192,51 @@ public class Main extends AppCompatActivity implements OnClickListener{
         startActivity(intent);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_option, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        switch(id) {
+            case R.id.menu_select:
+                if (mBTA != null && !isConnect)
+                {
+                    Intent myIntent1 = new Intent(Main.this, DeviceList.class);
+                    myIntent1.putExtra("BTAdapter", new BTSerial(mBTA));
+                    startActivityForResult(myIntent1, REQUEST_DEVICE);
+                    return true;
+                }
+                else if (mBTA == null)
+                {
+                    logMessege("기기가 블루투스를 지원하지 않습니다.");
+                    return true;
+                }
+
+                logMessege("이미 다른 기기와 연결되었습니다.");
+                return true;
+
+            case R.id.menu_avg:
+                if(isConnect) {
+                    doCommu(RQUEST_TODAY_TEMP);
+                    return true;
+                }
+                else if (mBTA == null)
+                {
+                    logMessege("기기가 블루투스를 지원하지 않습니다.");
+                    return true;
+                }
+
+                logMessege("기기와 연결되지 않았습니다.");
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     public void doConnect(BluetoothDevice device) {
         mBTD = device;
 
@@ -229,12 +277,9 @@ public class Main extends AppCompatActivity implements OnClickListener{
             if (mBTS != null && mBTS.isConnected())
             {
                 remoteDeviceName = mBTD.getName();
-                mBTA.cancelDiscovery();
             }
 
-        } catch (IOException e) {
-            //logMessege(e.toString());
-        }
+        } catch (IOException e) {}
     }
 
     public void doCommu(String msg) {
@@ -463,50 +508,7 @@ public class Main extends AppCompatActivity implements OnClickListener{
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_option, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        switch(id) {
-            case R.id.menu_select:
-                if (mBTA != null && !isConnect)
-                {
-                    Intent myIntent1 = new Intent(Main.this, DeviceList.class);
-                    myIntent1.putExtra("BTAdapter", new BTSerial(mBTA));
-                    startActivityForResult(myIntent1, REQUEST_DEVICE);
-                    return true;
-                }
-                else if (mBTA == null)
-                {
-                    logMessege("기기가 블루투스를 지원하지 않습니다.");
-                    return true;
-                }
-
-                logMessege("이미 다른 기기와 연결되었습니다.");
-                return true;
-
-            case R.id.menu_avg:
-                if(isConnect) {
-                    doCommu(RQUEST_TODAY_TEMP);
-                    return true;
-                }
-                else if (mBTA == null)
-                {
-                    logMessege("기기가 블루투스를 지원하지 않습니다.");
-                    return true;
-                }
-
-                logMessege("기기와 연결되지 않았습니다.");
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     public void onClick(View v) {
@@ -535,30 +537,31 @@ public class Main extends AppCompatActivity implements OnClickListener{
     }
 
     public void setTemp(String temp_s) {
+        Float temp_f = Float.parseFloat(temp_s);
 
-        if(!temp_s.equals("--") && Float.parseFloat(temp_s) >= 45)
+        if(!temp_s.equals("--") && temp_f >= 45)
         {
             title.setBackgroundDrawable(new ColorDrawable(0xffff4c4c));
             background.setBackgroundColor(Color.parseColor("#ff4c4c"));
-            tempText1.setText(temp_s);
+            tempText1.setText(form.format(temp_f));
         }
-        else if(!temp_s.equals("--") && Float.parseFloat(temp_s) >= 35)
+        else if(!temp_s.equals("--") && temp_f >= 35)
         {
             title.setBackgroundDrawable(new ColorDrawable(0xffffa54c));
             background.setBackgroundColor(Color.parseColor("#ffa54c"));
-            tempText1.setText(temp_s);
+            tempText1.setText(form.format(temp_f));
         }
-        else if(!temp_s.equals("--") && Float.parseFloat(temp_s) >= 25)
+        else if(!temp_s.equals("--") && temp_f >= 25)
         {
             title.setBackgroundDrawable(new ColorDrawable(0xffffdc4c));
             background.setBackgroundColor(Color.parseColor("#ffdc4c"));
-            tempText1.setText(temp_s);
+            tempText1.setText(form.format(temp_f));
         }
-        else if(!temp_s.equals("--") && Float.parseFloat(temp_s) >= 15)
+        else if(!temp_s.equals("--") && temp_f >= 15)
         {
             title.setBackgroundDrawable(new ColorDrawable(0xff86ea6e));
             background.setBackgroundColor(Color.parseColor("#86ea6e"));
-            tempText1.setText(temp_s);
+            tempText1.setText(form.format(temp_f));
         }
         else
         {
