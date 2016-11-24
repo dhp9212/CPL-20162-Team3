@@ -11,10 +11,10 @@ void loop()
     val=analogRead(0.0);
     dat= (500.0 * val) /1024.0;
 
-    String ret = "TMPR#";
-    String sval = String(dat);
-    Serial.print(ret + sval);
-    delay(10000);
+    String ret = "TMPR#" + String(dat);
+    
+    Serial.print(ret);
+    delay(600000);
 }
 
 

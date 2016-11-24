@@ -16,29 +16,20 @@ import static org.eclipse.californium.core.coap.CoAP.ResponseCode.*;
 
 
 
-public class Server extends CoapServer{
+public class DBServer extends CoapServer{
 	
 	static final String REQUEST_CURRENT_TEMP = "2";
 	static final String RQUEST_TODAY_TEMP ="3";
 	
-	static String ip_addr = "";
+
 	
 	private static final int COAP_PORT = NetworkConfig.getStandard().getInt(NetworkConfig.Keys.COAP_PORT);
 	
 	public static void main(String[] args){
 		
 		
-/*
-		if(args.length != 1){
-			System.out.println("Usage : java -jar FILENAME.jar IP_ADDRESS");
-			System.exit(0);
-		}
-		ip_addr = args[0];
-*/
-		ip_addr = "192.168.10.100";
-		
 		try{
-			Server server = new Server();
+			DBServer server = new DBServer();
 			server.addEndpoints();
 			server.start();
 			
@@ -62,7 +53,7 @@ public class Server extends CoapServer{
 		}
 	}
 	
-	public Server() throws SocketException{
+	public DBServer() throws SocketException{
 		add(new Resource());
 	}
 
@@ -76,7 +67,7 @@ public class Server extends CoapServer{
 		}
 		
 		
-		Database db = new Database(ip_addr);
+		AccessDB db = new AccessDB();
 		
 		// If server receives GET from client
 		// DB select

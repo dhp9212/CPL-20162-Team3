@@ -7,7 +7,7 @@ import java.sql.Statement;
 import javax.net.ssl.SSLContext;
 
 
-public class Database {
+public class AccessDB {
 	
 	static final String REQUEST_CURRENT_TEMP = "2";
 	static final String RQUEST_TODAY_TEMP ="3";
@@ -16,15 +16,11 @@ public class Database {
 	static final String ENDPOINT_BLUETOOTH_CLOSE = "BTCL";
 	static final String ENDPOINT_SENSOR_TEMPERATURE = "TMPR";
 
-	private String url = "";
-	//private String url = "jdbc:mysql://192.168.10.100/VLC_Infra";
+	
+	private String url = "jdbc:mysql://localhost/VLC_Infra";
 	private String id = "root";
 	private String pwd = "ehdgk123";
 	
-	public Database(String ip_addr){
-		url = "jdbc:mysql://" + ip_addr + "/VLC_Infra";
-		System.out.println(url);
-	}
 	
 	public String processMsg(String message, String request){
 
@@ -71,8 +67,10 @@ public class Database {
 					query = "SELECT SVALUE FROM SENSOR_DATA "
 							+ "WHERE EXTRACT(YEAR FROM STIME) = EXTRACT(YEAR FROM NOW()) "
 							+ "AND EXTRACT(MONTH FROM STIME) = EXTRACT(MONTH FROM NOW()) "
-							+ "AND EXTRACT(DAY FROM STIME) = EXTRACT(DAY FROM NOW())"
-							+ "AND EXTRACT(HOUR FROM STIME) MOD 3 = 0";
+							+ "AND EXTRACT(DAY FROM STIME) = EXTRACT(DAY FROM NOW()) "
+							+ "AND EXTRACT(HOUR FROM STIME) MOD 3 = 0 "
+							+ "AND EXTRACT(MINUTE FROM STIME) = 0 "
+							+ "AND EXTRACT(SECOND FROM STIME) = 0";
 							
 					ResultSet result = select(state, query);
 					
